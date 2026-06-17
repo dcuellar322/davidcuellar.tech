@@ -1,0 +1,115 @@
+---
+import { BrainCircuit, Boxes, DatabaseZap, ShieldCheck } from "lucide-react";
+import { skillGroups } from "../data/skills";
+
+const icons = [Boxes, ShieldCheck, DatabaseZap, BrainCircuit];
+---
+
+<div class="skill-grid">
+  {skillGroups.map((group, index) => {
+    const Icon = icons[index] ?? Boxes;
+    return (
+      <article class={`skill-group accent-${group.accent}`} data-reveal>
+        <div class="skill-head">
+          <span><Icon aria-hidden="true" /></span>
+          <div>
+            <h3>{group.name}</h3>
+            <p>{group.description}</p>
+          </div>
+        </div>
+        <div class="skill-list" aria-label={`${group.name} skills`}>
+          {group.skills.map((skill) => <span>{skill}</span>)}
+        </div>
+      </article>
+    );
+  })}
+</div>
+
+<style>
+  .skill-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .skill-group {
+    --accent: var(--cyan);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.084), rgba(255, 255, 255, 0.032));
+    padding: 1.15rem;
+  }
+
+  .accent-green {
+    --accent: var(--green);
+  }
+
+  .accent-violet {
+    --accent: var(--violet);
+  }
+
+  .accent-amber {
+    --accent: var(--amber);
+  }
+
+  .skill-head {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 0.9rem;
+    align-items: start;
+  }
+
+  .skill-head > span {
+    display: grid;
+    width: 44px;
+    height: 44px;
+    place-items: center;
+    border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+    border-radius: var(--radius-sm);
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    color: var(--accent);
+  }
+
+  .skill-head svg {
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+
+  h3,
+  p {
+    margin: 0;
+  }
+
+  h3 {
+    font-size: 1.18rem;
+  }
+
+  p {
+    margin-top: 0.2rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.52rem;
+    margin-top: 1.05rem;
+  }
+
+  .skill-list span {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.045);
+    padding: 0.4rem 0.58rem;
+    color: var(--text);
+    font-size: 0.78rem;
+    font-weight: 780;
+  }
+
+  @media (max-width: 760px) {
+    .skill-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

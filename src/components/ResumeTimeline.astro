@@ -1,0 +1,222 @@
+---
+import { BriefcaseBusiness, GraduationCap } from "lucide-react";
+import { education, experience } from "../data/resume";
+---
+
+<div class="resume-shell">
+  <div class="timeline" aria-label="Experience timeline">
+    {experience.map((item) => (
+      <article class={`timeline-item tone-${item.tone}`} data-reveal>
+        <div class="timeline-marker" aria-hidden="true">
+          <BriefcaseBusiness />
+        </div>
+        <div class="timeline-card glass">
+          <div class="timeline-header">
+            <div>
+              <h3>{item.company}</h3>
+              {item.location && <p class="location">{item.location}</p>}
+            </div>
+            <ul class="role-list" aria-label={`${item.company} roles`}>
+              {item.roles.map((role) => <li>{role}</li>)}
+            </ul>
+          </div>
+          <p>{item.summary}</p>
+          <ul class="highlight-list">
+            {item.highlights.map((highlight) => <li>{highlight}</li>)}
+          </ul>
+          <ul class="tag-list" aria-label={`${item.company} tags`}>
+            {item.tags.map((tag) => <li class="tag">{tag}</li>)}
+          </ul>
+        </div>
+      </article>
+    ))}
+    <article class="timeline-item tone-cyan" data-reveal>
+      <div class="timeline-marker" aria-hidden="true">
+        <GraduationCap />
+      </div>
+      <div class="timeline-card glass">
+        <div class="timeline-header">
+          <div>
+            <h3>{education.school}</h3>
+            <p class="location">{education.degree}</p>
+          </div>
+          <ul class="role-list" aria-label="Education details">
+            <li>{education.specialization}</li>
+            <li>Minor: {education.minor}</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>
+
+<style>
+  .resume-shell {
+    position: relative;
+  }
+
+  .timeline {
+    position: relative;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .timeline::before {
+    position: absolute;
+    top: 0.8rem;
+    bottom: 0.8rem;
+    left: 22px;
+    width: 1px;
+    content: "";
+    background: linear-gradient(180deg, transparent, rgba(103, 232, 249, 0.5), rgba(167, 139, 250, 0.35), transparent);
+  }
+
+  .timeline-item {
+    --tone: var(--cyan);
+    display: grid;
+    grid-template-columns: 46px minmax(0, 1fr);
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .tone-blue {
+    --tone: var(--blue);
+  }
+
+  .tone-green {
+    --tone: var(--green);
+  }
+
+  .tone-violet {
+    --tone: var(--violet);
+  }
+
+  .tone-amber {
+    --tone: var(--amber);
+  }
+
+  .tone-cyan {
+    --tone: var(--cyan);
+  }
+
+  .timeline-marker {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    width: 46px;
+    height: 46px;
+    place-items: center;
+    border: 1px solid color-mix(in srgb, var(--tone) 50%, transparent);
+    border-radius: 50%;
+    background: var(--bg);
+    color: var(--tone);
+    box-shadow: 0 0 28px color-mix(in srgb, var(--tone) 20%, transparent);
+  }
+
+  .timeline-marker svg {
+    width: 1.05rem;
+    height: 1.05rem;
+  }
+
+  .timeline-card {
+    padding: 1.25rem;
+  }
+
+  .timeline-header {
+    display: grid;
+    grid-template-columns: minmax(0, 0.76fr) minmax(180px, 0.44fr);
+    gap: 1rem;
+    align-items: start;
+    margin-bottom: 0.85rem;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: clamp(1.35rem, 2.5vw, 2.05rem);
+    line-height: 1.05;
+  }
+
+  p {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .location {
+    margin-top: 0.26rem;
+    color: var(--muted-2);
+    font-size: 0.86rem;
+    font-weight: 750;
+  }
+
+  .role-list,
+  .highlight-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .role-list {
+    display: grid;
+    gap: 0.36rem;
+    justify-items: end;
+  }
+
+  .role-list li {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.045);
+    padding: 0.28rem 0.52rem;
+    color: var(--text);
+    font-size: 0.72rem;
+    font-weight: 800;
+  }
+
+  .highlight-list {
+    display: grid;
+    gap: 0.55rem;
+    margin: 1rem 0 1.1rem;
+  }
+
+  .highlight-list li {
+    position: relative;
+    padding-left: 1rem;
+    color: var(--muted);
+  }
+
+  .highlight-list li::before {
+    position: absolute;
+    top: 0.62em;
+    left: 0;
+    width: 5px;
+    height: 5px;
+    content: "";
+    border-radius: 50%;
+    background: var(--tone);
+  }
+
+  @media (max-width: 700px) {
+    .timeline {
+      gap: 1.4rem;
+    }
+
+    .timeline::before {
+      display: none;
+    }
+
+    .timeline-item {
+      grid-template-columns: 1fr;
+    }
+
+    .timeline-marker {
+      display: none;
+    }
+
+    .timeline-header {
+      grid-template-columns: 1fr;
+    }
+
+    .role-list {
+      justify-items: start;
+    }
+  }
+</style>

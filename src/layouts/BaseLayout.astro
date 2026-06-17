@@ -1,0 +1,67 @@
+---
+import CommandPalette from "../components/CommandPalette";
+import MotionController from "../components/MotionController";
+import Header from "../components/Header.astro";
+import { profile } from "../data/profile";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const title = Astro.props.title ?? "David Cuellar — Software Engineering Leader";
+const description =
+  Astro.props.description ??
+  "Software engineering leader building calm systems for complex workflows across data, automation, operations, and product engineering.";
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://davidcuellar.tech").toString();
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: profile.name,
+  jobTitle: profile.role,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "San Antonio",
+    addressRegion: "TX",
+    addressCountry: "US",
+  },
+  url: "https://davidcuellar.tech",
+  sameAs: [profile.social.linkedin, profile.social.github, profile.social.x],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content="/og-image.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="/og-image.svg" />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-shell">
+      <Header />
+      <main id="main">
+        <slot />
+      </main>
+    </div>
+    <CommandPalette client:load />
+    <MotionController client:load />
+  </body>
+</html>

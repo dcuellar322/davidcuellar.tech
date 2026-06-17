@@ -1,0 +1,159 @@
+---
+import { ArrowUpRight, Box, History, Home, Trophy } from "lucide-react";
+
+interface Project {
+  name: string;
+  url: string;
+  description: string;
+  tags: readonly string[];
+  accent: string;
+  status: string;
+  note?: string;
+}
+
+const { project, index } = Astro.props as { project: Project; index: number };
+const icons = [Home, History, Trophy];
+const Icon = icons[index] ?? Box;
+---
+
+<article class={`project-card accent-${project.accent}`} data-project-card data-reveal>
+  <div class="project-topline">
+    <span class="project-icon"><Icon aria-hidden="true" /></span>
+    <span class="project-status">{project.status}</span>
+  </div>
+  <h3>{project.name}</h3>
+  <p>{project.description}</p>
+  <ul class="tag-list" aria-label={`${project.name} tags`}>
+    {project.tags.map((tag) => <li class="tag">{tag}</li>)}
+  </ul>
+  {project.note && <p class="project-note">{project.note}</p>}
+  <a class="project-link" href={project.url} target="_blank" rel="noreferrer">
+    View app
+    <ArrowUpRight aria-hidden="true" />
+  </a>
+</article>
+
+<style>
+  .project-card {
+    position: relative;
+    display: grid;
+    min-height: 410px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.095), rgba(255, 255, 255, 0.036)),
+      rgba(255, 255, 255, 0.04);
+    padding: 1.25rem;
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.22);
+    transition:
+      transform 260ms var(--ease-out),
+      border-color 260ms var(--ease-out),
+      background 260ms var(--ease-out);
+  }
+
+  .project-card::before {
+    position: absolute;
+    top: -80px;
+    right: -70px;
+    width: 190px;
+    height: 190px;
+    content: "";
+    border: 1px solid color-mix(in srgb, var(--accent) 54%, transparent);
+    border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in srgb, var(--accent) 18%, transparent), transparent 62%);
+  }
+
+  .project-card::after {
+    position: absolute;
+    inset: auto 1.25rem 1.25rem;
+    height: 1px;
+    content: "";
+    background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent) 62%, transparent), transparent);
+  }
+
+  .project-card:hover {
+    transform: translateY(-6px);
+    border-color: color-mix(in srgb, var(--accent) 44%, var(--border));
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.046)),
+      rgba(255, 255, 255, 0.055);
+  }
+
+  .accent-cyan {
+    --accent: var(--cyan);
+  }
+
+  .accent-violet {
+    --accent: var(--violet);
+  }
+
+  .accent-green {
+    --accent: var(--green);
+  }
+
+  .project-topline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .project-icon {
+    display: grid;
+    width: 46px;
+    height: 46px;
+    place-items: center;
+    border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
+    border-radius: var(--radius-sm);
+    background: color-mix(in srgb, var(--accent) 11%, transparent);
+    color: var(--accent);
+  }
+
+  .project-icon svg {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  .project-status {
+    color: color-mix(in srgb, var(--accent) 78%, white);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    margin: 3.3rem 0 0;
+    font-size: clamp(1.8rem, 3vw, 2.55rem);
+    line-height: 1;
+  }
+
+  p {
+    margin: 1rem 0 1.1rem;
+    color: var(--muted);
+  }
+
+  .project-note {
+    margin-top: auto;
+    color: var(--amber);
+    font-size: 0.78rem;
+    font-weight: 750;
+  }
+
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: fit-content;
+    margin-top: 1rem;
+    color: var(--text);
+    font-weight: 850;
+  }
+
+  .project-link svg {
+    width: 1rem;
+    height: 1rem;
+    color: var(--accent);
+  }
+</style>

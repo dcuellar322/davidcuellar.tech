@@ -1,0 +1,466 @@
+---
+import { ArrowUpRight, CheckCircle2, GitBranch, Network, Radar, TerminalSquare } from "lucide-react";
+import Footer from "../components/Footer.astro";
+import Hero from "../components/Hero.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import ResumeTimeline from "../components/ResumeTimeline.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import SkillMatrix from "../components/SkillMatrix.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildLog, principles, profile } from "../data/profile";
+import { projects } from "../data/projects";
+---
+
+<BaseLayout>
+  <Hero />
+
+  <section class="section" id="principles" aria-labelledby="principles-title">
+    <div class="container">
+      <SectionHeading
+        id="principles-title"
+        kicker="Operating principles"
+        title="A leadership system for shipping useful software."
+        description={profile.shortBio}
+      />
+
+      <div class="principle-grid">
+        {principles.map((principle, index) => (
+          <article class={`principle-card tone-${principle.tone}`} data-reveal>
+            <div class="principle-index">0{index + 1}</div>
+            <span class="principle-icon">
+              {index === 0 && <CheckCircle2 aria-hidden="true" />}
+              {index === 1 && <Radar aria-hidden="true" />}
+              {index === 2 && <Network aria-hidden="true" />}
+            </span>
+            <h3>{principle.title}</h3>
+            <p>{principle.description}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="projects" aria-labelledby="projects-title">
+    <div class="container">
+      <SectionHeading
+        id="projects-title"
+        kicker="Featured projects"
+        title="Workflow products, built from real operational pressure."
+        description="These projects are product nodes in the system map: family operations, league storytelling, and junior-golf scheduling."
+      />
+      <div class="projects-grid">
+        {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="resume" aria-labelledby="resume-title">
+    <div class="container">
+      <SectionHeading
+        id="resume-title"
+        kicker="Interactive resume"
+        title="Traditional timeline, command-center treatment."
+        description="A readable path through technical leadership, platform automation, data systems, product ownership, and education."
+      />
+      <ResumeTimeline />
+    </div>
+  </section>
+
+  <section class="section build-log-section" id="build-log" aria-labelledby="build-log-title">
+    <div class="container build-log-grid">
+      <div data-reveal>
+        <p class="kicker">Build log resume</p>
+        <h2 id="build-log-title">Career milestones as commits.</h2>
+        <p>
+          A creative resume mode for the work beneath the titles: the architecture decisions, compliance saves,
+          automation paths, data-system refactors, and leadership habits that make delivery calmer.
+        </p>
+        <a class="button primary" href="#skills">
+          Scan the stack
+          <ArrowUpRight aria-hidden="true" />
+        </a>
+      </div>
+      <div class="terminal glass" data-reveal>
+        <div class="terminal-bar">
+          <span></span>
+          <span></span>
+          <span></span>
+          <strong>git log --author="David Cuellar" --systems</strong>
+        </div>
+        <ol class="commit-list">
+          {buildLog.map((entry) => (
+            <li>
+              <div class="commit-icon"><GitBranch aria-hidden="true" /></div>
+              <div>
+                <code>{entry.command}</code>
+                <p>{entry.detail}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="skills" aria-labelledby="skills-title">
+    <div class="container">
+      <SectionHeading
+        id="skills-title"
+        kicker="Skill matrix"
+        title="Grouped by how systems actually get built."
+        description="The stack is organized by operating area instead of a loose cloud of technologies."
+      />
+      <SkillMatrix />
+    </div>
+  </section>
+
+  <section class="section system-map" aria-labelledby="system-map-title">
+    <div class="container system-map-grid">
+      <div class="map-copy" data-reveal>
+        <p class="kicker">System map</p>
+        <h2 id="system-map-title">Product thinking across messy real-world workflows.</h2>
+        <p>
+          The connective tissue is the same whether the domain is bank operations, enterprise data movement,
+          cloud automation, family coordination, fantasy-football history, or junior-golf planning: make the
+          system legible, then make the next action easier.
+        </p>
+      </div>
+      <div class="map-panel glass" data-reveal>
+        <div class="map-node core"><TerminalSquare aria-hidden="true" /> DavidOS</div>
+        <div class="map-node node-a">Data platforms</div>
+        <div class="map-node node-b">Automation</div>
+        <div class="map-node node-c">Family workflows</div>
+        <div class="map-node node-d">Product delivery</div>
+        <span class="map-line line-a"></span>
+        <span class="map-line line-b"></span>
+        <span class="map-line line-c"></span>
+        <span class="map-line line-d"></span>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .principle-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .principle-card {
+    --tone: var(--cyan);
+    position: relative;
+    min-height: 300px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.084), rgba(255, 255, 255, 0.032));
+    padding: 1.15rem;
+  }
+
+  .principle-card::after {
+    position: absolute;
+    right: -34px;
+    bottom: -34px;
+    width: 130px;
+    height: 130px;
+    content: "";
+    border: 1px solid color-mix(in srgb, var(--tone) 34%, transparent);
+    border-radius: 50%;
+  }
+
+  .tone-green {
+    --tone: var(--green);
+  }
+
+  .tone-amber {
+    --tone: var(--amber);
+  }
+
+  .principle-index {
+    color: var(--muted-2);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    font-weight: 800;
+  }
+
+  .principle-icon {
+    display: grid;
+    width: 48px;
+    height: 48px;
+    place-items: center;
+    margin: 3.5rem 0 1rem;
+    border: 1px solid color-mix(in srgb, var(--tone) 45%, transparent);
+    border-radius: var(--radius-sm);
+    background: color-mix(in srgb, var(--tone) 10%, transparent);
+    color: var(--tone);
+  }
+
+  .principle-icon svg {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  .principle-card h3 {
+    margin: 0;
+    font-size: 1.45rem;
+    line-height: 1.04;
+  }
+
+  .principle-card p {
+    margin: 0.7rem 0 0;
+    color: var(--muted);
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .build-log-section {
+    background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.024), transparent);
+  }
+
+  .build-log-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.55fr) minmax(360px, 0.75fr);
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .build-log-grid h2,
+  .system-map h2 {
+    margin: 0;
+    font-size: clamp(2.25rem, 5.8vw, 5rem);
+    line-height: 0.96;
+    letter-spacing: 0;
+  }
+
+  .build-log-grid p,
+  .system-map p {
+    color: var(--muted);
+  }
+
+  .terminal {
+    overflow: hidden;
+  }
+
+  .terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.42rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.8rem 1rem;
+  }
+
+  .terminal-bar span {
+    width: 0.62rem;
+    height: 0.62rem;
+    border-radius: 50%;
+    background: var(--danger);
+  }
+
+  .terminal-bar span:nth-child(2) {
+    background: var(--amber);
+  }
+
+  .terminal-bar span:nth-child(3) {
+    background: var(--green);
+  }
+
+  .terminal-bar strong {
+    margin-left: 0.4rem;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+  }
+
+  .commit-list {
+    display: grid;
+    gap: 0.15rem;
+    margin: 0;
+    padding: 0.6rem;
+    list-style: none;
+  }
+
+  .commit-list li {
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 0.8rem;
+    border-radius: var(--radius-sm);
+    padding: 0.72rem;
+  }
+
+  .commit-list li:hover {
+    background: rgba(255, 255, 255, 0.055);
+  }
+
+  .commit-icon {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    border: 1px solid rgba(103, 232, 249, 0.22);
+    border-radius: var(--radius-sm);
+    color: var(--cyan);
+  }
+
+  .commit-icon svg {
+    width: 0.98rem;
+    height: 0.98rem;
+  }
+
+  code {
+    color: var(--green);
+    font-family: var(--font-mono);
+    font-size: 0.86rem;
+    font-weight: 800;
+    overflow-wrap: anywhere;
+  }
+
+  .commit-list p {
+    margin: 0.35rem 0 0;
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+
+  .system-map-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.58fr) minmax(360px, 0.72fr);
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .map-panel {
+    position: relative;
+    min-height: 420px;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 50% 50%, rgba(103, 232, 249, 0.11), transparent 36%),
+      linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  }
+
+  .map-panel::before {
+    position: absolute;
+    inset: 0;
+    content: "";
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+    background-size: 46px 46px;
+    opacity: 0.5;
+  }
+
+  .map-node {
+    position: absolute;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.42rem;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--radius-sm);
+    background: rgba(5, 7, 13, 0.72);
+    padding: 0.62rem 0.72rem;
+    color: var(--text);
+    font-size: 0.82rem;
+    font-weight: 850;
+    backdrop-filter: blur(12px);
+  }
+
+  .map-node svg {
+    width: 1rem;
+    height: 1rem;
+    color: var(--cyan);
+  }
+
+  .core {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-color: rgba(103, 232, 249, 0.45);
+  }
+
+  .node-a {
+    top: 18%;
+    left: 12%;
+  }
+
+  .node-b {
+    top: 18%;
+    right: 12%;
+  }
+
+  .node-c {
+    right: 12%;
+    bottom: 18%;
+  }
+
+  .node-d {
+    bottom: 18%;
+    left: 12%;
+  }
+
+  .map-line {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 35%;
+    height: 1px;
+    transform-origin: left center;
+    background: linear-gradient(90deg, rgba(103, 232, 249, 0.65), transparent);
+  }
+
+  .line-a {
+    transform: rotate(214deg);
+  }
+
+  .line-b {
+    transform: rotate(326deg);
+  }
+
+  .line-c {
+    transform: rotate(34deg);
+  }
+
+  .line-d {
+    transform: rotate(146deg);
+  }
+
+  @media (max-width: 920px) {
+    .principle-grid,
+    .projects-grid,
+    .build-log-grid,
+    .system-map-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .principle-grid,
+    .projects-grid {
+      gap: 0.85rem;
+    }
+
+    .principle-card {
+      min-height: 250px;
+    }
+
+    .terminal-bar strong {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .map-panel {
+      min-height: 360px;
+    }
+
+    .map-node {
+      max-width: 142px;
+      font-size: 0.74rem;
+    }
+  }
+</style>

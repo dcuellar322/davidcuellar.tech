@@ -1,0 +1,116 @@
+---
+import { MapPin } from "lucide-react";
+import { FaGithub, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
+import { profile } from "../data/profile";
+---
+
+<footer class="footer section tight" id="contact">
+  <div class="container footer-grid">
+    <div>
+      <p class="kicker">Contact</p>
+      <h2>Want to compare notes on engineering systems, product ideas, or family workflow apps?</h2>
+      <p class="footer-copy">
+        Social links are the public contact path for this site. Phone number, work email, and a contact form are intentionally omitted.
+      </p>
+    </div>
+    <div class="footer-actions glass">
+      <a href={profile.social.linkedin} target="_blank" rel="noreferrer">
+        <FaLinkedinIn aria-hidden="true" />
+        LinkedIn
+      </a>
+      <a href={profile.social.github} target="_blank" rel="noreferrer">
+        <FaGithub aria-hidden="true" />
+        GitHub
+      </a>
+      <a href={profile.social.x} target="_blank" rel="noreferrer">
+        <FaXTwitter aria-hidden="true" />
+        X
+      </a>
+      <span>
+        <MapPin aria-hidden="true" />
+        {profile.location}
+      </span>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>DavidOS: Systems in Motion</span>
+    <span>{new Date().getFullYear()} {profile.name}</span>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.82fr) minmax(280px, 0.42fr);
+    gap: 2rem;
+    align-items: start;
+  }
+
+  h2 {
+    margin: 0;
+    max-width: 850px;
+    font-size: clamp(2rem, 5vw, 4.55rem);
+    line-height: 0.96;
+    letter-spacing: 0;
+  }
+
+  .footer-copy {
+    max-width: 620px;
+    margin: 1rem 0 0;
+    color: var(--muted);
+  }
+
+  .footer-actions {
+    display: grid;
+    gap: 0.58rem;
+    padding: 1rem;
+  }
+
+  .footer-actions a,
+  .footer-actions span {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.035);
+    padding: 0.85rem;
+    color: var(--muted);
+    font-weight: 800;
+  }
+
+  .footer-actions a:hover {
+    color: var(--text);
+    border-color: rgba(103, 232, 249, 0.35);
+  }
+
+  .footer-actions svg {
+    width: 1rem;
+    height: 1rem;
+    color: var(--cyan);
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 3rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 1rem;
+    color: var(--muted-2);
+    font-size: 0.8rem;
+    font-weight: 750;
+  }
+
+  @media (max-width: 760px) {
+    .footer-grid,
+    .footer-bottom {
+      grid-template-columns: 1fr;
+      flex-direction: column;
+    }
+  }
+</style>

@@ -1,0 +1,18 @@
+---
+interface Props {
+  id?: string;
+  kicker: string;
+  title: string;
+  description: string;
+}
+
+const { id, kicker, title, description } = Astro.props;
+---
+
+<div class="section-heading" data-reveal>
+  <div>
+    <p class="kicker">{kicker}</p>
+    <h2 id={id}>{title}</h2>
+  </div>
+  <p>{description}</p>
+</div>
