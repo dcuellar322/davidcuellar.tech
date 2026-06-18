@@ -2,6 +2,8 @@
 import { MapPin } from "lucide-react";
 import { FaGithub, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 import { profile } from "../data/profile";
+
+const currentYear = new Date().getFullYear();
 ---
 
 <footer class="footer section tight" id="contact">
@@ -9,9 +11,7 @@ import { profile } from "../data/profile";
     <div>
       <p class="kicker">Contact</p>
       <h2>Want to compare notes on engineering systems, product ideas, or family workflow apps?</h2>
-      <p class="footer-copy">
-        Social links are the public contact path for this site. Phone number, work email, and a contact form are intentionally omitted.
-      </p>
+      <p class="footer-copy">Husband, father, weekend golfer, and builder of useful systems.</p>
     </div>
     <div class="footer-actions glass">
       <a href={profile.social.linkedin} target="_blank" rel="noreferrer">
@@ -32,9 +32,13 @@ import { profile } from "../data/profile";
       </span>
     </div>
   </div>
+  <div class="container footer-verse" aria-label="Favorite scripture">
+    <p>"Do justice, love kindness, and walk humbly."</p>
+    <cite>Micah 6:8</cite>
+  </div>
   <div class="container footer-bottom">
     <span>DavidOS: Systems in Motion</span>
-    <span>{new Date().getFullYear()} {profile.name}</span>
+    <span>&copy; <span data-current-year>{currentYear}</span> {profile.name}</span>
   </div>
 </footer>
 
@@ -62,6 +66,47 @@ import { profile } from "../data/profile";
     max-width: 620px;
     margin: 1rem 0 0;
     color: var(--muted);
+  }
+
+  .footer-verse {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    gap: 0.45rem;
+    margin-top: 3.4rem;
+    padding: 2rem 1rem 2.2rem;
+    text-align: center;
+  }
+
+  .footer-verse::before,
+  .footer-verse::after {
+    width: min(420px, 86%);
+    height: 1px;
+    content: "";
+    background: linear-gradient(90deg, transparent, rgba(103, 232, 249, 0.45), transparent);
+  }
+
+  .footer-verse p {
+    max-width: 840px;
+    margin: 0;
+    color: var(--text);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.85rem, 4.8vw, 4.2rem);
+    font-style: italic;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+
+  .footer-verse cite {
+    color: var(--cyan);
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    font-style: normal;
+    font-weight: 850;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
   }
 
   .footer-actions {
@@ -98,7 +143,7 @@ import { profile } from "../data/profile";
     display: flex;
     justify-content: space-between;
     gap: 1rem;
-    margin-top: 3rem;
+    margin-top: 0;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     padding-top: 1rem;
     color: var(--muted-2);

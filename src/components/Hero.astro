@@ -2,7 +2,10 @@
 import { ArrowDown, ArrowUpRight, MapPin, Sparkles } from "lucide-react";
 import { FaGithub, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 import { profile } from "../data/profile";
+import { getExperienceYears } from "../utils/dates";
 import ThreeScene from "./ThreeScene";
+
+const experienceYears = getExperienceYears();
 ---
 
 <section class="hero section" id="top" aria-labelledby="hero-title">
@@ -17,7 +20,10 @@ import ThreeScene from "./ThreeScene";
       <p class="hero-subcopy">{profile.heroSubheadline}</p>
       <div class="hero-meta" aria-label="Profile context">
         <span><MapPin aria-hidden="true" /> {profile.location}</span>
-        <span><Sparkles aria-hidden="true" /> 13+ years across product, platform, data, and operations</span>
+        <span>
+          <Sparkles aria-hidden="true" />
+          <span><span data-experience-years>{experienceYears}</span>+ years across product, platform, data, and operations</span>
+        </span>
       </div>
       <div class="hero-actions">
         <a class="button primary" href="#build-log">

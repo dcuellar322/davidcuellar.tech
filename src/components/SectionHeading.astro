@@ -3,10 +3,11 @@ interface Props {
   id?: string;
   kicker: string;
   title: string;
-  description: string;
+  description?: string;
+  descriptionHtml?: string;
 }
 
-const { id, kicker, title, description } = Astro.props;
+const { id, kicker, title, description, descriptionHtml } = Astro.props;
 ---
 
 <div class="section-heading" data-reveal>
@@ -14,5 +15,5 @@ const { id, kicker, title, description } = Astro.props;
     <p class="kicker">{kicker}</p>
     <h2 id={id}>{title}</h2>
   </div>
-  <p>{description}</p>
+  {descriptionHtml ? <p set:html={descriptionHtml} /> : <p>{description}</p>}
 </div>

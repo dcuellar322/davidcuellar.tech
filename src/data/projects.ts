@@ -4,7 +4,13 @@ export const projects = [
     url: "https://www.thefamilyhub.app",
     description:
       "A home-operations app for family calendars, chores, todos, meals, weather, and weekly household workflows.",
-    tags: ["Family Ops", "Product Engineering", "Vue", "FastAPI", "Workflow Design"],
+    tags: [
+      "Family Ops",
+      "Product Engineering",
+      "Vue",
+      "FastAPI",
+      "Workflow Design",
+    ],
     accent: "cyan",
     status: "Live product",
   },
@@ -16,7 +22,6 @@ export const projects = [
     tags: ["Fantasy Football", "Analytics", "League History", "Product Design"],
     accent: "violet",
     status: "League OS",
-    note: "Verify spelling of the LeagueLore domain before launch.",
   },
   {
     name: "STPGA Scheduler",

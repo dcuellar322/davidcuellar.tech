@@ -14,13 +14,62 @@ type CommandAction = {
 };
 
 const actions: CommandAction[] = [
-  { id: "projects", label: "Go to Projects", hint: "Featured product work", type: "jump", href: "#projects", icon: "jump" },
-  { id: "resume", label: "Go to Resume", hint: "Traditional experience timeline", type: "jump", href: "#resume", icon: "jump" },
-  { id: "build-log", label: "Go to Build Log", hint: "Creative git-log resume", type: "jump", href: "#build-log", icon: "jump" },
-  { id: "skills", label: "Go to Skills", hint: "Skill matrix", type: "jump", href: "#skills", icon: "jump" },
-  { id: "linkedin", label: "Open LinkedIn", hint: "Public contact path", type: "external", href: profile.social.linkedin, icon: "linkedin" },
-  { id: "github", label: "Open GitHub", hint: "Code and project work", type: "external", href: profile.social.github, icon: "github" },
-  { id: "x", label: "Open X", hint: "Social profile", type: "external", href: profile.social.x, icon: "x" },
+  {
+    id: "projects",
+    label: "Go to Projects",
+    hint: "Featured product work",
+    type: "jump",
+    href: "#projects",
+    icon: "jump",
+  },
+  {
+    id: "resume",
+    label: "Go to Resume",
+    hint: "Traditional experience timeline",
+    type: "jump",
+    href: "#resume",
+    icon: "jump",
+  },
+  {
+    id: "build-log",
+    label: "Go to Build Log",
+    hint: "Creative git-log resume",
+    type: "jump",
+    href: "#build-log",
+    icon: "jump",
+  },
+  {
+    id: "skills",
+    label: "Go to Skills",
+    hint: "Skill matrix",
+    type: "jump",
+    href: "#skills",
+    icon: "jump",
+  },
+  {
+    id: "linkedin",
+    label: "Open LinkedIn",
+    hint: "Public contact path",
+    type: "external",
+    href: profile.social.linkedin,
+    icon: "linkedin",
+  },
+  {
+    id: "github",
+    label: "Open GitHub",
+    hint: "Code and project work",
+    type: "external",
+    href: profile.social.github,
+    icon: "github",
+  },
+  {
+    id: "x",
+    label: "Open X",
+    hint: "Social profile",
+    type: "external",
+    href: profile.social.x,
+    icon: "x",
+  },
   ...projects.map((project) => ({
     id: project.name.toLowerCase().replace(/\s+/g, "-"),
     label: `Open ${project.name}`,
@@ -43,16 +92,20 @@ export default function CommandPalette() {
   const [query, setQuery] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
 
   const filtered = useMemo(() => {
     const normalized = query.trim().toLowerCase();
     if (!normalized) return actions;
-    return actions.filter((action) => `${action.label} ${action.hint}`.toLowerCase().includes(normalized));
+    return actions.filter((action) =>
+      `${action.label} ${action.hint}`.toLowerCase().includes(normalized),
+    );
   }, [query]);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      const wantsPalette = (event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k";
+      const wantsPalette =
+        (event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k";
       if (wantsPalette) {
         event.preventDefault();
         setOpen(true);
@@ -90,25 +143,39 @@ export default function CommandPalette() {
     }
   }, [activeIndex, filtered.length]);
 
+  useEffect(() => {
+    const activeButton = listRef.current?.querySelector<HTMLElement>(
+      'button[aria-selected="true"]',
+    );
+    activeButton?.scrollIntoView({ block: "nearest" });
+  }, [activeIndex, filtered.length]);
+
   if (!open) return null;
 
   const runAction = (action: CommandAction | undefined) => {
     if (!action) return;
     setOpen(false);
     if (action.type === "jump") {
-      document.querySelector(action.href)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      document
+        .querySelector(action.href)
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
       return;
     }
     window.open(action.href, "_blank", "noopener,noreferrer");
   };
 
   return (
-    <div className="palette-backdrop" role="presentation" onMouseDown={() => setOpen(false)}>
+    <div
+      className="palette-backdrop"
+      role="presentation"
+      onMouseDown={() => setOpen(false)}
+    >
       <div
         className="palette-dialog"
         role="dialog"
         aria-modal="true"
         aria-labelledby="command-palette-title"
+        data-lenis-prevent
         onMouseDown={(event) => event.stopPropagation()}
       >
         <div className="palette-search">
@@ -124,7 +191,9 @@ export default function CommandPalette() {
             onKeyDown={(event) => {
               if (event.key === "ArrowDown") {
                 event.preventDefault();
-                setActiveIndex((index) => Math.min(filtered.length - 1, index + 1));
+                setActiveIndex((index) =>
+                  Math.min(filtered.length - 1, index + 1),
+                );
               }
               if (event.key === "ArrowUp") {
                 event.preventDefault();
@@ -137,7 +206,11 @@ export default function CommandPalette() {
             }}
             placeholder="Jump to a system, project, or profile..."
           />
-          <button type="button" onClick={() => setOpen(false)} aria-label="Close command palette">
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            aria-label="Close command palette"
+          >
             <X aria-hidden="true" />
           </button>
         </div>
@@ -146,7 +219,13 @@ export default function CommandPalette() {
           Command palette
         </h2>
 
-        <div className="palette-list" role="listbox" aria-label="Command actions">
+        <div
+          ref={listRef}
+          className="palette-list"
+          role="listbox"
+          aria-label="Command actions"
+          data-lenis-prevent
+        >
           {filtered.length ? (
             filtered.map((action, index) => (
               <button

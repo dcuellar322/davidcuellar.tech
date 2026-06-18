@@ -3,11 +3,11 @@ export const profile = {
   role: "Software Engineering Leader",
   location: "San Antonio, TX",
   eyebrow: "Personal Command Center",
-  headline: "I build calm systems for messy workflows.",
+  headline: "I build reliable systems for messy workflows.",
   positioning:
     "Software engineering leader building product-grade tools across data, automation, operations, and family-life workflows.",
   shortBio:
-    "For 13+ years, I've worked across financial services, technology, data platforms, compliance-heavy systems, and developer productivity. My favorite work sits at the intersection of architecture, automation, product thinking, and clear execution.",
+    "For %EXPERIENCE_YEARS%+ years, I've worked across financial services, technology, data platforms, compliance-heavy systems, and developer productivity. My favorite work sits at the intersection of architecture, automation, product thinking, and clear execution.",
   heroSubheadline:
     "I'm a software engineer and engineering leader focused on turning complex operational problems into reliable, usable products - from enterprise data platforms and automation to personal tools for family life, fantasy football, and junior golf scheduling.",
   social: {
@@ -20,12 +20,14 @@ export const profile = {
 export const principles = [
   {
     title: "Ship the useful thing.",
-    description: "The best architecture is the one that gets a real workflow unstuck.",
+    description:
+      "The best architecture is the one that gets a real workflow unstuck.",
     tone: "cyan",
   },
   {
     title: "Make the system visible.",
-    description: "Logs, dashboards, tests, docs, and observability are part of the product.",
+    description:
+      "Logs, dashboards, tests, docs, and observability are part of the product.",
     tone: "green",
   },
   {
@@ -37,28 +39,29 @@ export const principles = [
 
 export const buildLog = [
   {
+    command:
+      "feat(hp-content): co-author localized product-content API for HP.com",
+    detail:
+      "Helped build the Java API service HP.com used to call and retrieve product content across locales.",
+  },
+  {
+    command: "fix(usaa-ops): ship compliance-critical bank workflows",
+    detail:
+      "Led fraud transaction history, issue-management, and collections delivery across deadline-sensitive bank operations.",
+  },
+  {
+    command: "feat(leaguelore): turn fantasy-football history into a product",
+    detail:
+      "Built a league companion for records, rankings, draft prep, and the stories that make a league worth remembering.",
+  },
+  {
     command: "feat(platform): automate cloud-agent scaling with Kubernetes",
     detail:
       "Turned cloud-agent demand signals into autoscaling infrastructure using queue-aware delivery patterns.",
   },
   {
-    command: "fix(compliance): deliver bank operations workflow before deadline",
-    detail:
-      "Led critical issue-management and collections delivery across compliance-sensitive bank operations.",
-  },
-  {
-    command: "refactor(data): simplify enterprise MDM access patterns",
-    detail:
-      "Expanded data governance platforms with APIs, React surfaces, and cleaner release automation.",
-  },
-  {
-    command: "build(product): ship Family Hub for household operations",
+    command: "build(family-hub): ship household operations as software",
     detail:
       "Designed a home-operations product that makes calendars, chores, todos, meals, and weather easier to coordinate.",
-  },
-  {
-    command: "chore(leadership): improve documentation, testing, and code review culture",
-    detail:
-      "Kept delivery healthier by making quality practices visible, repeatable, and easier for teams to maintain.",
   },
 ];

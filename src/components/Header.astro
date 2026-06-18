@@ -1,5 +1,4 @@
 ---
-import { Command } from "lucide-react";
 import { FaGithub, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 import { profile } from "../data/profile";
 
@@ -36,8 +35,7 @@ const navItems = [
       <FaXTwitter aria-hidden="true" />
     </a>
     <button class="command-trigger" type="button" data-command-open aria-label="Open command palette">
-      <Command aria-hidden="true" />
-      <span>⌘K</span>
+      <kbd><span class="command-symbol">⌘</span><span>K</span></kbd>
     </button>
   </div>
 </header>
@@ -160,23 +158,32 @@ const navItems = [
     color: var(--text);
   }
 
-  .icon-link svg,
-  .command-trigger svg {
+  .icon-link svg {
     width: 1rem;
     height: 1rem;
   }
 
   .command-trigger {
-    gap: 0.42rem;
-    min-width: 66px;
-    padding: 0 0.62rem;
+    min-width: 68px;
+    padding: 0 0.78rem;
     cursor: pointer;
   }
 
-  .command-trigger span {
-    color: var(--muted-2);
-    font-size: 0.72rem;
-    font-weight: 850;
+  .command-trigger kbd {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.42rem;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.92rem;
+    font-weight: 900;
+    letter-spacing: 0.02em;
+  }
+
+  .command-trigger .command-symbol {
+    color: var(--cyan);
+    font-size: 0.86rem;
+    text-shadow: 0 0 16px rgba(103, 232, 249, 0.45);
   }
 
   @media (max-width: 940px) {

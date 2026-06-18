@@ -13,7 +13,7 @@ interface Props {
 const title = Astro.props.title ?? "David Cuellar — Software Engineering Leader";
 const description =
   Astro.props.description ??
-  "Software engineering leader building calm systems for complex workflows across data, automation, operations, and product engineering.";
+  "Software engineering leader building reliable systems for complex workflows across data, automation, operations, and product engineering.";
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://davidcuellar.tech").toString();
 const jsonLd = {
@@ -63,5 +63,23 @@ const jsonLd = {
     </div>
     <CommandPalette client:load />
     <MotionController client:load />
+    <script>
+      const now = new Date();
+      const experienceStart = new Date(2010, 0, 1);
+      let experienceYears = now.getFullYear() - experienceStart.getFullYear();
+      const anniversary = new Date(now.getFullYear(), experienceStart.getMonth(), experienceStart.getDate());
+
+      if (now < anniversary) {
+        experienceYears -= 1;
+      }
+
+      document.querySelectorAll("[data-experience-years]").forEach((element) => {
+        element.textContent = String(experienceYears);
+      });
+
+      document.querySelectorAll("[data-current-year]").forEach((element) => {
+        element.textContent = String(now.getFullYear());
+      });
+    </script>
   </body>
 </html>

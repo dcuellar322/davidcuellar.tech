@@ -5,7 +5,9 @@ import Lenis from "lenis";
 
 export default function MotionController() {
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     if (prefersReducedMotion) return;
 
     gsap.registerPlugin(ScrollTrigger);
@@ -43,26 +45,30 @@ export default function MotionController() {
       );
     });
 
-    gsap.utils.toArray<HTMLElement>("[data-project-card]").forEach((card, index) => {
-      gsap.fromTo(
-        card,
-        { y: 30, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.85,
-          delay: index * 0.08,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: card,
-            start: "top 88%",
-            once: true,
+    gsap.utils
+      .toArray<HTMLElement>("[data-project-card]")
+      .forEach((card, index) => {
+        gsap.fromTo(
+          card,
+          { y: 30, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.85,
+            delay: index * 0.08,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 88%",
+              once: true,
+            },
           },
-        },
-      );
-    });
+        );
+      });
 
-    const sections = gsap.utils.toArray<HTMLElement>("main section[id]");
+    const sections = gsap.utils.toArray<HTMLElement>(
+      "main :is(section, footer)[id]",
+    );
     const navLinks = gsap.utils.toArray<HTMLAnchorElement>(".site-nav a");
     sections.forEach((section) => {
       ScrollTrigger.create({
@@ -72,7 +78,8 @@ export default function MotionController() {
         onToggle: (self) => {
           if (!self.isActive) return;
           navLinks.forEach((link) => {
-            link.dataset.active = link.getAttribute("href") === `#${section.id}` ? "true" : "false";
+            link.dataset.active =
+              link.getAttribute("href") === `#${section.id}` ? "true" : "false";
           });
         },
       });

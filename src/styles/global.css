@@ -15,8 +15,16 @@ body {
   min-width: 320px;
   overflow-x: hidden;
   background:
-    radial-gradient(circle at 72% 8%, rgba(103, 232, 249, 0.13), transparent 34rem),
-    radial-gradient(circle at 12% 34%, rgba(167, 139, 250, 0.1), transparent 28rem),
+    radial-gradient(
+      circle at 72% 8%,
+      rgba(103, 232, 249, 0.13),
+      transparent 34rem
+    ),
+    radial-gradient(
+      circle at 12% 34%,
+      rgba(167, 139, 250, 0.1),
+      transparent 28rem
+    ),
     linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 48%, var(--bg) 100%);
   color: var(--text);
   font-family: var(--font-sans);
@@ -46,7 +54,11 @@ body::after {
   content: "";
   background:
     linear-gradient(120deg, rgba(103, 232, 249, 0.04), transparent 24%),
-    repeating-linear-gradient(90deg, transparent 0 88px, rgba(255, 255, 255, 0.022) 88px 89px);
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 88px,
+      rgba(255, 255, 255, 0.022) 88px 89px
+    );
   opacity: 0.65;
 }
 
@@ -162,7 +174,11 @@ button {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.096), rgba(255, 255, 255, 0.042)),
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.096),
+      rgba(255, 255, 255, 0.042)
+    ),
     rgba(255, 255, 255, 0.045);
   box-shadow: var(--shadow);
   backdrop-filter: blur(18px);
@@ -195,7 +211,11 @@ button {
 
 .button.primary {
   border-color: rgba(103, 232, 249, 0.5);
-  background: linear-gradient(135deg, rgba(103, 232, 249, 0.22), rgba(96, 165, 250, 0.12));
+  background: linear-gradient(
+    135deg,
+    rgba(103, 232, 249, 0.22),
+    rgba(96, 165, 250, 0.12)
+  );
   color: #effcff;
 }
 
@@ -247,12 +267,19 @@ button {
 }
 
 .palette-dialog {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
   width: min(680px, 100%);
+  max-height: calc(100dvh - 32px);
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: var(--radius);
   background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.105), rgba(255, 255, 255, 0.045)),
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.105),
+      rgba(255, 255, 255, 0.045)
+    ),
     rgba(5, 7, 13, 0.94);
   box-shadow: 0 28px 100px rgba(0, 0, 0, 0.56);
 }
@@ -301,9 +328,12 @@ button {
 .palette-list {
   display: grid;
   gap: 0.18rem;
+  min-height: 0;
   max-height: min(460px, 62vh);
   overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 0.55rem;
+  -webkit-overflow-scrolling: touch;
 }
 
 .palette-list button {
