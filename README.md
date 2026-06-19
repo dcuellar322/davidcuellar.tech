@@ -1,6 +1,6 @@
 # David Cuellar Personal Landing Page
 
-DavidOS: Systems in Motion is a production-ready personal landing page for David Cuellar, a software engineering leader in San Antonio, TX. The site presents David's career, projects, operating principles, and skill matrix as a premium engineering command center with a decorative career constellation, command palette, creative build-log resume, and accessible static content.
+DavidOS: Systems in Motion is a production-ready personal landing page for David Cuellar, Director of Engineering at Exodus Intelligence in San Antonio, TX. The site presents David's career, projects, operating principles, and skill matrix as a premium engineering command center with a decorative career constellation, command palette, creative build-log resume, and accessible static content.
 
 ## Tech Stack
 
@@ -68,5 +68,4 @@ Recommended production settings:
 
 - Phone number, work email, and a contact form are intentionally omitted. Public contact actions use LinkedIn, GitHub, and X.
 - Verify spelling of the LeagueLore domain before launch. The project currently uses `https://www.leagueloreapp.com` from the build brief.
-- Exact employment dates were not provided, so the resume is organized by role sequence rather than date ranges.
 - No external paid assets, CMS, backend, or database are used.

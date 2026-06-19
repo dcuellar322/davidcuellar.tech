@@ -1,8 +1,40 @@
 export const experience = [
   {
+    company: "Exodus Intelligence",
+    location: "Lakeway, TX (Remote)",
+    roles: [
+      "Director of Engineering (2025-Present)",
+      "Principal Software Engineer (2024-2025)",
+    ],
+    summary:
+      "Engineering leader responsible for strategy, technical vision, team execution, and platform reliability across a Python-focused technology organization.",
+    highlights: [
+      "Promoted to Director of Engineering after serving as a hands-on technical leader across software delivery, infrastructure, DevOps, CI/CD, and internal platform initiatives.",
+      "Defines engineering direction and execution strategy for team priorities, balancing business outcomes, technical debt, delivery risk, system reliability, and long-term scalability.",
+      "Leads the engineering team through planning, architecture, implementation, code quality, release readiness, production support, and technical mentorship.",
+      "Established GitLab-based engineering KPIs to improve visibility into delivery performance, review effectiveness, pipeline health, deployment flow, and post-release quality.",
+      "Drives developer productivity and operational process improvements using GitLab, Docker, HashiCorp Nomad, MinIO/S3, LDAP/TLS, CI/CD pipelines, and internal tooling.",
+      "Partners with technical and business stakeholders to align roadmap priorities, improve delivery predictability, reduce operational risk, and scale engineering practices.",
+    ],
+    tags: [
+      "Python",
+      "Engineering Strategy",
+      "Platform Reliability",
+      "GitLab",
+      "Docker",
+      "Nomad",
+      "MinIO/S3",
+      "Leadership",
+    ],
+    tone: "cyan",
+  },
+  {
     company: "USAA",
     location: "San Antonio, TX",
-    roles: ["Software Engineer Lead", "Software Engineer Senior"],
+    roles: [
+      "Software Engineer Lead (2023-2024)",
+      "Software Engineer Senior (2020-2023)",
+    ],
     summary:
       "Technical lead for bank operations digital delivery, compliance-sensitive workflows, automated testing, documentation, code reviews, and production releases.",
     highlights: [

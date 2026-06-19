@@ -2,13 +2,13 @@ export const skillGroups = [
   {
     name: "Product Engineering",
     description: "Product surfaces, APIs, and typed front-end systems.",
-    skills: ["Vue", "React", "TypeScript", "FastAPI", "Python", "Java"],
+    skills: ["Python", "FastAPI", "Vue", "React", "TypeScript", "Java"],
     accent: "cyan",
   },
   {
     name: "Platform & Delivery",
     description: "Delivery pipelines, runtime infrastructure, and release discipline.",
-    skills: ["Docker", "AWS", "CI/CD", "Kubernetes", "Helm", "GitLab", "GitHub"],
+    skills: ["GitLab", "Docker", "CI/CD", "HashiCorp Nomad", "MinIO/S3", "Kubernetes", "Helm"],
     accent: "green",
   },
   {
@@ -20,7 +20,7 @@ export const skillGroups = [
   {
     name: "Engineering Leadership",
     description: "Technical clarity, delivery planning, coaching, and quality systems.",
-    skills: ["Architecture", "Code Review", "Documentation", "Coaching", "Delivery Planning", "Testing Strategy"],
+    skills: ["Engineering Strategy", "Architecture", "Code Review", "Mentorship", "Delivery Planning", "Testing Strategy"],
     accent: "amber",
   },
 ] as const;

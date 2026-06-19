@@ -10,10 +10,10 @@ interface Props {
   description?: string;
 }
 
-const title = Astro.props.title ?? "David Cuellar — Software Engineering Leader";
+const title = Astro.props.title ?? "David Cuellar — Director of Engineering";
 const description =
   Astro.props.description ??
-  "Software engineering leader building reliable systems for complex workflows across data, automation, operations, and product engineering.";
+  "Director of Engineering at Exodus Intelligence building reliable systems for complex workflows across data, automation, operations, and product engineering.";
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://davidcuellar.tech").toString();
 const jsonLd = {

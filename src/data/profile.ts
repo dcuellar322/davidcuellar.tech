@@ -1,15 +1,15 @@
 export const profile = {
   name: "David Cuellar",
-  role: "Software Engineering Leader",
+  role: "Director of Engineering",
   location: "San Antonio, TX",
   eyebrow: "Personal Command Center",
   headline: "I build reliable systems for messy workflows.",
   positioning:
-    "Software engineering leader building product-grade tools across data, automation, operations, and family-life workflows.",
+    "Director of Engineering at Exodus Intelligence, leading software delivery, platform reliability, and product-grade tools across data, automation, operations, and family-life workflows.",
   shortBio:
-    "For %EXPERIENCE_YEARS%+ years, I've worked across financial services, technology, data platforms, compliance-heavy systems, and developer productivity. My favorite work sits at the intersection of architecture, automation, product thinking, and clear execution.",
+    "For %EXPERIENCE_YEARS%+ years, I've worked across financial services, technology organizations, data platforms, compliance-heavy systems, and developer productivity. My favorite work sits at the intersection of architecture, automation, product thinking, and clear execution.",
   heroSubheadline:
-    "I'm a software engineer and engineering leader focused on turning complex operational problems into reliable, usable products - from enterprise data platforms and automation to personal tools for family life, fantasy football, and junior golf scheduling.",
+    "I'm a software engineer and engineering leader focused on turning complex operational problems into reliable, usable products - from Python-focused platform engineering, enterprise data movement, and automation to personal tools for family life, fantasy football, and junior golf scheduling.",
   social: {
     linkedin: "https://www.linkedin.com/in/dcuellar/",
     github: "https://github.com/dcuellar322",
@@ -38,6 +38,11 @@ export const principles = [
 ];
 
 export const buildLog = [
+  {
+    command: "feat(exodus): lead engineering strategy and platform reliability",
+    detail:
+      "Direct engineering execution across roadmap delivery, architecture, operational excellence, developer productivity, and release readiness.",
+  },
   {
     command:
       "feat(hp-content): co-author localized product-content API for HP.com",

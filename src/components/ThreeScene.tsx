@@ -5,8 +5,9 @@ import * as THREE from "three";
 
 const nodeData = [
   { label: "core", position: [0, 0, 0], color: "#67e8f9", size: 0.23 },
-  { label: "USAA", position: [1.9, 0.65, -0.25], color: "#60a5fa", size: 0.14 },
-  { label: "VantagePoint", position: [-1.4, 1.2, 0.35], color: "#86efac", size: 0.12 },
+  { label: "Exodus", position: [1.9, 0.65, -0.25], color: "#60a5fa", size: 0.15 },
+  { label: "USAA", position: [-1.4, 1.2, 0.35], color: "#86efac", size: 0.14 },
+  { label: "VantagePoint", position: [2.1, -0.25, -0.35], color: "#67e8f9", size: 0.12 },
   { label: "Netspend", position: [-2.1, -0.35, -0.15], color: "#a78bfa", size: 0.13 },
   { label: "HP", position: [1.35, -1.28, 0.25], color: "#fbbf24", size: 0.11 },
   { label: "Projects", position: [0.15, 1.85, -0.45], color: "#67e8f9", size: 0.1 },
