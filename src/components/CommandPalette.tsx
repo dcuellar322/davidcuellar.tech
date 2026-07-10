@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ArrowDownToLine, Search, X } from "lucide-react";
 import { FaGithub, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 import { projects } from "../data/projects";
@@ -23,6 +23,14 @@ const actions: CommandAction[] = [
     icon: "jump",
   },
   {
+    id: "principles",
+    label: "Go to Approach",
+    hint: "Operating principles",
+    type: "jump",
+    href: "#principles",
+    icon: "jump",
+  },
+  {
     id: "resume",
     label: "Go to Resume",
     hint: "Traditional experience timeline",
@@ -44,6 +52,14 @@ const actions: CommandAction[] = [
     hint: "Skill matrix",
     type: "jump",
     href: "#skills",
+    icon: "jump",
+  },
+  {
+    id: "contact",
+    label: "Go to Contact",
+    hint: "Social links and location",
+    type: "jump",
+    href: "#contact",
     icon: "jump",
   },
   {
@@ -93,6 +109,16 @@ export default function CommandPalette() {
   const [activeIndex, setActiveIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
+  const bodyOverflowRef = useRef("");
+
+  const closePalette = useCallback((restoreFocus = true) => {
+    setOpen(false);
+    if (restoreFocus) {
+      window.setTimeout(() => triggerRef.current?.focus(), 0);
+    }
+  }, []);
 
   const filtered = useMemo(() => {
     const normalized = query.trim().toLowerCase();
@@ -108,16 +134,23 @@ export default function CommandPalette() {
         (event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k";
       if (wantsPalette) {
         event.preventDefault();
+        triggerRef.current =
+          document.activeElement instanceof HTMLElement
+            ? document.activeElement
+            : document.querySelector<HTMLElement>("[data-command-open]");
         setOpen(true);
       }
-      if (event.key === "Escape") {
-        setOpen(false);
+      if (event.key === "Escape" && open) {
+        event.preventDefault();
+        closePalette();
       }
     };
 
     const onClick = (event: MouseEvent) => {
       const target = event.target as HTMLElement | null;
-      if (target?.closest("[data-command-open]")) {
+      const trigger = target?.closest<HTMLElement>("[data-command-open]");
+      if (trigger) {
+        triggerRef.current = trigger;
         setOpen(true);
       }
     };
@@ -128,13 +161,22 @@ export default function CommandPalette() {
       document.removeEventListener("keydown", onKeyDown);
       document.removeEventListener("click", onClick);
     };
-  }, []);
+  }, [closePalette, open]);
 
   useEffect(() => {
     if (!open) return;
     setQuery("");
     setActiveIndex(0);
+    bodyOverflowRef.current = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const siteShell = document.querySelector<HTMLElement>(".site-shell");
+    if (siteShell) siteShell.inert = true;
     window.setTimeout(() => inputRef.current?.focus(), 0);
+
+    return () => {
+      document.body.style.overflow = bodyOverflowRef.current;
+      if (siteShell) siteShell.inert = false;
+    };
   }, [open]);
 
   useEffect(() => {
@@ -154,7 +196,7 @@ export default function CommandPalette() {
 
   const runAction = (action: CommandAction | undefined) => {
     if (!action) return;
-    setOpen(false);
+    closePalette(false);
     if (action.type === "jump") {
       document
         .querySelector(action.href)
@@ -164,19 +206,40 @@ export default function CommandPalette() {
     window.open(action.href, "_blank", "noopener,noreferrer");
   };
 
+  const handleDialogKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key !== "Tab") return;
+
+    const focusable = dialogRef.current?.querySelectorAll<HTMLElement>(
+      'input, button, a[href], [tabindex]:not([tabindex="-1"])',
+    );
+    if (!focusable?.length) return;
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  };
+
   return (
     <div
       className="palette-backdrop"
       role="presentation"
-      onMouseDown={() => setOpen(false)}
+      onMouseDown={() => closePalette()}
     >
       <div
+        ref={dialogRef}
         className="palette-dialog"
         role="dialog"
         aria-modal="true"
         aria-labelledby="command-palette-title"
         data-lenis-prevent
         onMouseDown={(event) => event.stopPropagation()}
+        onKeyDown={handleDialogKeyDown}
       >
         <div className="palette-search">
           <Search aria-hidden="true" />
@@ -204,11 +267,11 @@ export default function CommandPalette() {
                 runAction(filtered[activeIndex]);
               }
             }}
-            placeholder="Jump to a system, project, or profile..."
+            placeholder="Search or jump..."
           />
           <button
             type="button"
-            onClick={() => setOpen(false)}
+            onClick={() => closePalette()}
             aria-label="Close command palette"
           >
             <X aria-hidden="true" />

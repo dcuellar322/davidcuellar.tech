@@ -13,10 +13,26 @@ import { getExperienceYears } from "../utils/dates";
 
 const experienceYears = getExperienceYears();
 const shortBio = profile.shortBio.replace("%EXPERIENCE_YEARS%", `<span data-experience-years>${experienceYears}</span>`);
+const featuredBuildLog = buildLog.slice(0, 3);
+const additionalBuildLog = buildLog.slice(3);
 ---
 
 <BaseLayout>
   <Hero />
+
+  <section class="section" id="projects" aria-labelledby="projects-title">
+    <div class="container">
+      <SectionHeading
+        id="projects-title"
+        kicker="Featured projects"
+        title="Workflow products, built from real operational pressure."
+        description="These projects are product nodes in the system map: family operations, league storytelling, and junior-golf scheduling."
+      />
+      <div class="projects-grid">
+        {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
+      </div>
+    </div>
+  </section>
 
   <section class="section" id="principles" aria-labelledby="principles-title">
     <div class="container">
@@ -44,27 +60,13 @@ const shortBio = profile.shortBio.replace("%EXPERIENCE_YEARS%", `<span data-expe
     </div>
   </section>
 
-  <section class="section" id="projects" aria-labelledby="projects-title">
-    <div class="container">
-      <SectionHeading
-        id="projects-title"
-        kicker="Featured projects"
-        title="Workflow products, built from real operational pressure."
-        description="These projects are product nodes in the system map: family operations, league storytelling, and junior-golf scheduling."
-      />
-      <div class="projects-grid">
-        {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
-      </div>
-    </div>
-  </section>
-
   <section class="section" id="resume" aria-labelledby="resume-title">
     <div class="container">
       <SectionHeading
         id="resume-title"
-        kicker="Interactive resume"
-        title="Traditional timeline, command-center treatment."
-        description="A readable path through engineering strategy, platform reliability, technical leadership, data systems, product ownership, and education."
+        kicker="Experience"
+        title="Engineering leadership, grounded in delivery."
+        description="Recent leadership and platform work first, with earlier experience available when you want the full path."
       />
       <ResumeTimeline />
     </div>
@@ -73,11 +75,11 @@ const shortBio = profile.shortBio.replace("%EXPERIENCE_YEARS%", `<span data-expe
   <section class="section build-log-section" id="build-log" aria-labelledby="build-log-title">
     <div class="container build-log-grid">
       <div data-reveal>
-        <p class="kicker">Build log resume</p>
-        <h2 id="build-log-title">Career milestones as commits.</h2>
+        <p class="kicker">Selected build log</p>
+        <h2 id="build-log-title">The work beneath the titles.</h2>
         <p>
-          A creative resume mode for the work beneath the titles: the architecture decisions, compliance saves,
-          automation paths, data-system refactors, and leadership habits that make delivery more predictable.
+          A compact alternate view of the architecture decisions, compliance saves, automation paths, and product
+          bets that made delivery more predictable.
         </p>
         <a class="button primary" href="#skills">
           Scan the stack
@@ -92,7 +94,7 @@ const shortBio = profile.shortBio.replace("%EXPERIENCE_YEARS%", `<span data-expe
           <strong>git log --author="David Cuellar" --systems</strong>
         </div>
         <ol class="commit-list">
-          {buildLog.map((entry) => (
+          {featuredBuildLog.map((entry) => (
             <li>
               <div class="commit-icon"><GitBranch aria-hidden="true" /></div>
               <div>
@@ -102,6 +104,20 @@ const shortBio = profile.shortBio.replace("%EXPERIENCE_YEARS%", `<span data-expe
             </li>
           ))}
         </ol>
+        <details class="commit-more">
+          <summary>Show {additionalBuildLog.length} more selected commits</summary>
+          <ol class="commit-list commit-list-more" start={featuredBuildLog.length + 1}>
+            {additionalBuildLog.map((entry) => (
+              <li>
+                <div class="commit-icon"><GitBranch aria-hidden="true" /></div>
+                <div>
+                  <code>{entry.command}</code>
+                  <p>{entry.detail}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </details>
       </div>
     </div>
   </section>
@@ -288,6 +304,32 @@ const shortBio = profile.shortBio.replace("%EXPERIENCE_YEARS%", `<span data-expe
     margin: 0;
     padding: 0.6rem;
     list-style: none;
+  }
+
+  .commit-more {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.6rem;
+  }
+
+  .commit-more summary {
+    display: grid;
+    min-height: 44px;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-sm);
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  .commit-more summary:hover {
+    border-color: rgba(103, 232, 249, 0.32);
+    color: var(--text);
+  }
+
+  .commit-list-more {
+    padding: 0.6rem 0 0;
   }
 
   .commit-list li {

@@ -5,11 +5,11 @@ export const profile = {
   eyebrow: "Personal Command Center",
   headline: "I build reliable systems for messy workflows.",
   positioning:
-    "Director of Engineering at Exodus Intelligence, leading software delivery, platform reliability, and product-grade tools across data, automation, operations, and family-life workflows.",
+    "Director of Engineering at Exodus Intelligence, turning complex operational problems into reliable products across data, automation, and platform engineering.",
   shortBio:
     "For %EXPERIENCE_YEARS%+ years, I've worked across financial services, technology organizations, data platforms, compliance-heavy systems, and developer productivity. My favorite work sits at the intersection of architecture, automation, product thinking, and clear execution.",
   heroSubheadline:
-    "I'm a software engineer and engineering leader focused on turning complex operational problems into reliable, usable products - from Python-focused platform engineering, enterprise data movement, and automation to personal tools for family life, fantasy football, and junior golf scheduling.",
+    "I lead engineering systems at work and build focused products for family operations, fantasy-football history, and junior-golf planning.",
   social: {
     linkedin: "https://www.linkedin.com/in/dcuellar/",
     github: "https://github.com/dcuellar322",

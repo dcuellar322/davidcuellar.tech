@@ -1,11 +1,14 @@
 ---
 import { BriefcaseBusiness, GraduationCap } from "lucide-react";
 import { education, experience } from "../data/resume";
+
+const recentExperience = experience.slice(0, 3);
+const earlierExperience = experience.slice(3);
 ---
 
 <div class="resume-shell">
   <div class="timeline" aria-label="Experience timeline">
-    {experience.map((item) => (
+    {recentExperience.map((item) => (
       <article class={`timeline-item tone-${item.tone}`} data-reveal>
         <div class="timeline-marker" aria-hidden="true">
           <BriefcaseBusiness />
@@ -30,23 +33,56 @@ import { education, experience } from "../data/resume";
         </div>
       </article>
     ))}
-    <article class="timeline-item tone-cyan" data-reveal>
-      <div class="timeline-marker" aria-hidden="true">
-        <GraduationCap />
-      </div>
-      <div class="timeline-card glass">
-        <div class="timeline-header">
-          <div>
-            <h3>{education.school}</h3>
-            <p class="location">{education.degree}</p>
+    <details class="earlier-experience">
+      <summary>
+        <span>Earlier experience and education</span>
+        <small>{earlierExperience.length} roles · 1 degree</small>
+      </summary>
+      <div class="earlier-timeline">
+        {earlierExperience.map((item) => (
+          <article class={`timeline-item tone-${item.tone}`}>
+            <div class="timeline-marker" aria-hidden="true">
+              <BriefcaseBusiness />
+            </div>
+            <div class="timeline-card glass">
+              <div class="timeline-header">
+                <div>
+                  <h3>{item.company}</h3>
+                  {item.location && <p class="location">{item.location}</p>}
+                </div>
+                <ul class="role-list" aria-label={`${item.company} roles`}>
+                  {item.roles.map((role) => <li>{role}</li>)}
+                </ul>
+              </div>
+              <p>{item.summary}</p>
+              <ul class="highlight-list">
+                {item.highlights.map((highlight) => <li>{highlight}</li>)}
+              </ul>
+              <ul class="tag-list" aria-label={`${item.company} tags`}>
+                {item.tags.map((tag) => <li class="tag">{tag}</li>)}
+              </ul>
+            </div>
+          </article>
+        ))}
+        <article class="timeline-item tone-cyan">
+          <div class="timeline-marker" aria-hidden="true">
+            <GraduationCap />
           </div>
-          <ul class="role-list" aria-label="Education details">
-            <li>{education.specialization}</li>
-            <li>Minor: {education.minor}</li>
-          </ul>
-        </div>
+          <div class="timeline-card glass">
+            <div class="timeline-header">
+              <div>
+                <h3>{education.school}</h3>
+                <p class="location">{education.degree}</p>
+              </div>
+              <ul class="role-list" aria-label="Education details">
+                <li>{education.specialization}</li>
+                <li>Minor: {education.minor}</li>
+              </ul>
+            </div>
+          </div>
+        </article>
       </div>
-    </article>
+    </details>
   </div>
 </div>
 
@@ -77,6 +113,41 @@ import { education, experience } from "../data/resume";
     grid-template-columns: 46px minmax(0, 1fr);
     gap: 1rem;
     align-items: start;
+  }
+
+  .earlier-experience {
+    margin-left: 62px;
+  }
+
+  .earlier-experience summary {
+    display: flex;
+    min-height: 52px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.045);
+    padding: 0.8rem 1rem;
+    color: var(--text);
+    font-weight: 850;
+    cursor: pointer;
+  }
+
+  .earlier-experience summary:hover {
+    border-color: rgba(103, 232, 249, 0.35);
+    background: rgba(103, 232, 249, 0.07);
+  }
+
+  .earlier-experience summary small {
+    color: var(--muted);
+    font-size: 0.76rem;
+  }
+
+  .earlier-timeline {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1rem;
   }
 
   .tone-blue {
@@ -209,6 +280,16 @@ import { education, experience } from "../data/resume";
 
     .timeline-marker {
       display: none;
+    }
+
+    .earlier-experience {
+      margin-left: 0;
+    }
+
+    .earlier-experience summary {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.15rem;
     }
 
     .timeline-header {

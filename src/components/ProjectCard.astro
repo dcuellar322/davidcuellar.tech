@@ -6,6 +6,7 @@ interface Project {
   url: string;
   description: string;
   tags: readonly string[];
+  focus: string;
   accent: string;
   status: string;
   note?: string;
@@ -23,6 +24,10 @@ const Icon = icons[index] ?? Box;
   </div>
   <h3>{project.name}</h3>
   <p>{project.description}</p>
+  <div class="project-focus">
+    <span>My focus</span>
+    <strong>{project.focus}</strong>
+  </div>
   <ul class="tag-list" aria-label={`${project.name} tags`}>
     {project.tags.map((tag) => <li class="tag">{tag}</li>)}
   </ul>
@@ -134,6 +139,29 @@ const Icon = icons[index] ?? Box;
     color: var(--muted);
   }
 
+  .project-focus {
+    display: grid;
+    gap: 0.2rem;
+    margin: 0 0 1.1rem;
+    border-left: 2px solid var(--accent);
+    padding-left: 0.75rem;
+  }
+
+  .project-focus span {
+    color: var(--muted-2);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .project-focus strong {
+    color: var(--text);
+    font-size: 0.82rem;
+    line-height: 1.35;
+  }
+
   .project-note {
     margin-top: auto;
     color: var(--amber);
@@ -146,7 +174,8 @@ const Icon = icons[index] ?? Box;
     align-items: center;
     gap: 0.5rem;
     width: fit-content;
-    margin-top: 1rem;
+    min-height: 44px;
+    margin-top: 0.65rem;
     color: var(--text);
     font-weight: 850;
   }

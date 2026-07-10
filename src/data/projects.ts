@@ -11,6 +11,7 @@ export const projects = [
       "FastAPI",
       "Workflow Design",
     ],
+    focus: "Product strategy · architecture · full-stack delivery",
     accent: "cyan",
     status: "Live product",
   },
@@ -20,6 +21,7 @@ export const projects = [
     description:
       "A fantasy-football league companion for history, rankings, draft prep, and league storytelling.",
     tags: ["Fantasy Football", "Analytics", "League History", "Product Design"],
+    focus: "Product design · data modeling · AI-assisted storytelling",
     accent: "violet",
     status: "League OS",
   },
@@ -29,6 +31,7 @@ export const projects = [
     description:
       "A junior-golf scheduling tool for tracking events, dates, and planning across STPGA tournament options.",
     tags: ["Junior Golf", "Scheduling", "Family Workflow", "Utility App"],
+    focus: "Workflow design · schedule ingestion · planning UX",
     accent: "green",
     status: "Utility app",
   },
