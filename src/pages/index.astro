@@ -26,7 +26,7 @@ const additionalBuildLog = buildLog.slice(3);
         id="projects-title"
         kicker="Featured projects"
         title="Workflow products, built from real operational pressure."
-        description="These projects are product nodes in the system map: family operations, league storytelling, and junior-golf scheduling."
+        description="These projects are product nodes in the system map: developer tooling, family operations, league storytelling, and junior-golf scheduling."
       />
       <div class="projects-grid">
         {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
@@ -141,8 +141,8 @@ const additionalBuildLog = buildLog.slice(3);
         <h2 id="system-map-title">Product thinking across messy real-world workflows.</h2>
         <p>
           The connective tissue is the same whether the domain is platform reliability, bank operations,
-          enterprise data movement, cloud automation, family coordination, fantasy-football history, or
-          junior-golf planning: make the system legible, then make the next action easier.
+          enterprise data movement, cloud automation, local developer tooling, family coordination,
+          fantasy-football history, or junior-golf planning: make the system legible, then make the next action easier.
         </p>
       </div>
       <div class="map-panel glass" data-reveal>
@@ -236,7 +236,7 @@ const additionalBuildLog = buildLog.slice(3);
 
   .projects-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
   }
 

@@ -35,4 +35,15 @@ export const projects = [
     accent: "green",
     status: "Utility app",
   },
+  {
+    name: "Switchyard",
+    url: "https://switchyard.davidcuellar.tech",
+    description:
+      "A local development command center that unifies project state, runtimes, logs, ports, resources, and agent tools.",
+    tags: ["Developer Tools", "Go", "Vue", "Tauri", "MCP"],
+    focus:
+      "Product architecture · systems engineering · cross-platform delivery",
+    accent: "blue",
+    status: "Developer platform",
+  },
 ] as const;
