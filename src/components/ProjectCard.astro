@@ -1,5 +1,5 @@
 ---
-import { ArrowUpRight, Box, History, Home, Trophy } from "lucide-react";
+import { ArrowUpRight, Box, History, Home, TerminalSquare, Trophy } from "lucide-react";
 
 interface Project {
   name: string;
@@ -13,7 +13,7 @@ interface Project {
 }
 
 const { project, index } = Astro.props as { project: Project; index: number };
-const icons = [Home, History, Trophy];
+const icons = [Home, History, Trophy, TerminalSquare];
 const Icon = icons[index] ?? Box;
 ---
 
@@ -95,6 +95,10 @@ const Icon = icons[index] ?? Box;
 
   .accent-green {
     --accent: var(--green);
+  }
+
+  .accent-blue {
+    --accent: var(--blue);
   }
 
   .project-topline {
