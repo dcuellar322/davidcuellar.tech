@@ -55,7 +55,7 @@ export const buildLog = [
       "Led fraud transaction history, issue-management, and collections delivery across deadline-sensitive bank operations.",
   },
   {
-    command: "feat(leaguelore): turn fantasy-football history into a product",
+    command: "feat(league-saga): turn fantasy-football history into a product",
     detail:
       "Built a league companion for records, rankings, draft prep, and the stories that make a league worth remembering.",
   },

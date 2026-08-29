@@ -67,5 +67,5 @@ Recommended production settings:
 ## Assumptions / TODOs
 
 - Phone number, work email, and a contact form are intentionally omitted. Public contact actions use LinkedIn, GitHub, and X.
-- Verify spelling of the LeagueLore domain before launch. The project currently uses `https://www.leagueloreapp.com` from the build brief.
+- LeagueSaga uses the `league-saga` repository and publishes at `https://leaguesaga.com`.
 - No external paid assets, CMS, backend, or database are used.

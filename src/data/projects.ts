@@ -16,8 +16,8 @@ export const projects = [
     status: "Live product",
   },
   {
-    name: "LeagueLore",
-    url: "https://www.leagueloreapp.com",
+    name: "LeagueSaga",
+    url: "https://leaguesaga.com",
     description:
       "A fantasy-football league companion for history, rankings, draft prep, and league storytelling.",
     tags: ["Fantasy Football", "Analytics", "League History", "Product Design"],
